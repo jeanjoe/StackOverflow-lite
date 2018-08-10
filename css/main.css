@@ -43,6 +43,13 @@ a {
   margin-bottom: 1em;
 }
 
+.mx-auto {
+  margin: auto 0 !important;
+}
+
+.mx-auto {
+  margin: 0 auto !important;
+}
 .container {
   padding: 0 50px !important;
 }
@@ -147,7 +154,6 @@ a {
   flex: 4;
 }
 
-
 .button {
   padding: 8px 15px;
   border: 1px solid #95a5a6;
@@ -193,6 +199,32 @@ a {
   border: 1px solid #3498db;
   font-weight: bold;
   font-size: 12px;
+}
+
+.signin-card {
+  padding: 20px;
+  margin: auto;
+  width: 30%;
+  border: 1px solid #EEEEEE;
+}
+
+.signin-card label {
+  font-weight: bold;
+  display: block;
+  font-size: 14px;
+}
+
+.signin-card input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #EEEEEE;
+  border-radius: 0;
+}
+
+.card-title {
+  text-align: center;
+  font-weight: bold;
 }
 
 .footer {
