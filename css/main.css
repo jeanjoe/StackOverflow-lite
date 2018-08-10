@@ -1,0 +1,59 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #fff;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.flex{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.nav {
+  margin: 0;
+  background: #ECEFF1;
+  padding: 0;
+  border-top: 3px solid #e67e22;
+  border-bottom: 1px solid #ECEFF1;
+  clear: both;
+}
+
+.nav-menu .nav-menu-item {
+  display: inline-block;
+  margin: 0;
+}
+
+.nav-menu .nav-menu-item a {
+  padding: 5px 15px;
+}
+
+.nav-menu .nav-menu-item a > .button {
+  background: #dfe6e9;
+}
+
+.brand {
+  padding: 10px;
+  margin: auto 0;
+  width: 20%;
+  text-align: left;
+}
+.brand .logo-text {
+  font-weight: bold;
+  color: #000;
+}
+
+.brand .logo-text span{
+  font-weight: bolder;
+  font-size: 20px;
+  color: #e67e22;
+}
