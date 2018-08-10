@@ -118,6 +118,55 @@ a {
 .column-four {
   flex: 4;
 }
+
+
+.button {
+  padding: 8px 15px;
+  border: 1px solid #95a5a6;
+  border-radius: 4px;
+  background: #ecf0f1;
+  color: #7f8c8d;
+  cursor: pointer;
+}
+
+.button.sign-up {
+  background: transparent ;
+  color: #fff;
+  padding: 8px 25px;
+  text-transform: capitalize;
+  border-radius: 0px;
+  border: 1px solid #fff;
+}
+.button.google, .button.facebook {
+  width: 99% !important;
+  padding: 7px;
+  display: block;
+  box-sizing: border-box;
+  border-radius: 3px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.button.google {
+  background: #fff;
+  border: 1px solid #EEEEEE;
+  color: #000;
+}
+
+.button.facebook {
+  background: #3A539B;
+  border: 1px solid #3A539B;
+  color: #fff;
+}
+
+.button.button-blue{
+  background: #3498db;
+  color: #fff;
+  border: 1px solid #3498db;
+  font-weight: bold;
+  font-size: 12px;
+}
+
 .footer {
   margin-top: 10px;
   background: #ecf0f1;
