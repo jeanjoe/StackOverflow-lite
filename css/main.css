@@ -83,7 +83,7 @@ a {
   flex: 1;
 }
 .column-two {
-  flex: 2, 2;
+  flex: 2;
 }
 .column-three {
   flex: 3;
