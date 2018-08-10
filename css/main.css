@@ -79,6 +79,32 @@ a {
   padding: 5px 0;
   color: #fff;
 }
+
+
+.form-field{
+  display: block;
+  margin: 5px 0;
+}
+
+.form-field .input-span{
+  display: flex;
+}
+
+.form-field .input-span input{
+  width: 80%;
+  display: inline-block;
+  padding: 15px;
+  border: none;
+}
+
+.form-field .input-span label {
+  background: #bdc3c7;
+  color: #34495e;
+  padding: 13px;
+  font-size: 12px !important;
+  width: 20% !important;
+}
+
 .column-one {
   flex: 1;
 }
