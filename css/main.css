@@ -15,6 +15,34 @@ a {
   text-decoration: none;
 }
 
+.clear{
+  clear: both;
+}
+
+.text-right {
+  text-align: right!important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-justify{
+  text-align: justify !important;
+}
+
+.margin-top {
+  margin-top: 1em;
+}
+
+.margin-bottom {
+  margin-bottom: 1em;
+}
+
 .container {
   padding: 0 50px !important;
 }
