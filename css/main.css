@@ -250,6 +250,22 @@ a {
   font-weight: bold;
 }
 
+.tag {
+  border: 1px solid #EEEEEE;
+  padding: 5px !important;
+  border-radius: 4px;
+  margin-right: 4px;
+  font-size: 10px;
+  color: #192a56;
+  font-weight: normal;
+}
+
+.tag-green {
+  background: #44bd32;
+  color: #fff !important;
+  border: none;
+}
+
 .footer {
   margin-top: 10px;
   background: #ecf0f1;
