@@ -414,8 +414,8 @@ ul li {
         margin: 0 auto;
     }
 
-    .header column-center {
-      display: block;
+    .nav .column-center {
+      flex: initial;
     }
     .banner .column-two {
       display: none;
