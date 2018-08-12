@@ -17,7 +17,7 @@
           </a>
         </div>
         <div class="column-middle">
-          <form action="search.html" method="GET">
+          <form action="../search.html" method="GET">
             <div class="flex-container">
               <div class="column-three">
                 <input type="text" class="search" name="search" placeholder="Searching...">
@@ -39,21 +39,6 @@
   </header>
 
   <div class="content">
-    <div class="banner">
-      <div class="container">
-        <form action="search.html" method="GET">
-          <div class="flex-container">
-            <div class="column-three">
-              <input type="text" class="search" name="search" placeholder="Searching...">
-            </div>
-            <div class="column-one">
-              <button type="submit" class="button-search">Search</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-
     <div class="band">
       <div class="container">
         <p><strong>Stack Overflow Business Solutions:</strong> Looking to understand, engage, or hire developers? <strong>Learn more »</strong> </p>
@@ -63,34 +48,49 @@
     <div class="container margin-top">
       <div class="profile-flex-container">
         <div class="column-left">
-          Logged in as Manzede Benard
+          <div class="side-bar">
+            <span><a class="user-email" href="#">manzede@gmail.com</a></span>
+            <div class="items margin-top">
+              <a href="#" class="list-item">Questions (5)</a>
+              <a href="#" class="list-item">Answers (2)</a>
+              <a href="#" class="list-item">Log Out</a>
+            </div>
+          </div>
         </div>
         <div class="column-center">
-          <p>Your <strong>"Recently asked Questions"</strong>.</p>
-          <hr>
-          <ul class="questions">
-            <li class="question-list">
-              <p><a href="#">How to add use Flex Box using CSS3</a></p>
-              <a href="#" class="tag ">0 Views</a>
-              <a href="#" class="tag ">0 Answers</a>
+          <div class="profile-flex-container">
+            <div class="full-column">
+              <a href="#" class="button button-blue text-right">Ask Question</a>
+            </div>
+          </div>
+          <p><strong>Recently asked Questions</strong></p>
+          <hr class="margin-top">
+          <ul class="items">
+            <li class="item">
+              <h4><a href="#">How to add use Flex Box using CSS3</a></h4>
+              <a href="#" class="tag ">5 Votes</a>
+              <a href="#" class="tag ">4 Views</a>
+              <a href="#" class="tag ">8 Answers</a>
               <a href="#" class="tag tag-green">HTML5</a>
               <a href="#" class="tag tag-green">HTML5</a>
               <a href="#" class="tag tag-green">CSS3</a>
               <a href="#" class="tag">Manzede 3 mins ago</a>
             </li>
-            <li class="question-list">
-              <p><a href="#">How to add use Flex Box using CSS3</a></p>
-              <a href="#" class="tag ">0 Views</a>
-              <a href="#" class="tag ">0 Answers</a>
+            <li class="item">
+              <h4><a href="#">How to add use Flex Box using CSS3</a></h4>
+              <a href="#" class="tag ">2 Votes</a>
+              <a href="#" class="tag ">2 Views</a>
+              <a href="#" class="tag ">3 Answers</a>
               <a href="#" class="tag tag-green">HTML5</a>
               <a href="#" class="tag tag-green">HTML5</a>
               <a href="#" class="tag tag-green">CSS3</a>
               <a href="#" class="tag">Manzede 3 mins ago</a>
             </li>
-            <li class="question-list">
-              <p><a href="#">How to add use Flex Box using CSS3</a></p>
-              <a href="#" class="tag ">0 Views</a>
-              <a href="#" class="tag ">0 Answers</a>
+            <li class="item">
+              <h4><a href="#">How to add use Flex Box using CSS3</a></h4>
+              <a href="#" class="tag ">6 Votes</a>
+              <a href="#" class="tag ">19 Views</a>
+              <a href="#" class="tag ">7 Answers</a>
               <a href="#" class="tag tag-green">HTML5</a>
               <a href="#" class="tag tag-green">HTML5</a>
               <a href="#" class="tag tag-green">CSS3</a>
@@ -99,7 +99,7 @@
           </ul>
         </div>
         <div class="column-right">
-          <h6>Most Recent Questions</h6>
+          <h4>Questions with answers</h4>
           <ul class="lists">
             <li class="list-item"><a href="#">How to add side bar in css</a></li>
             <li class="list-item"><a href="#">How to create responsive navigation bar using HTML5 and CSS3</a></li>
