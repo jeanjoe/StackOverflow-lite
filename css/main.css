@@ -192,6 +192,12 @@ ul li {
 .full-column {
   text-align: right;
 }
+.full-width{
+  width: 100% !important;
+}
+.search-flex {
+  display: flex;
+}
 .search {
   width: 100%;
   display: block;
