@@ -399,3 +399,25 @@ ul li {
   font-size: 12px;
   color: #7f8c8d;
 }
+
+@media screen and (max-width: 900px) {
+    .signin-card {
+        width: 60%;
+        margin: 0 auto;
+    }
+
+}
+@media screen and (max-width: 600px) {
+    .signin-card {
+        width: 100%;
+        padding: 10px;
+        margin: 0 auto;
+    }
+
+    .header column-center {
+      display: block;
+    }
+    .banner .column-two {
+      display: none;
+    }
+}
