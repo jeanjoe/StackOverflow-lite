@@ -337,6 +337,17 @@ ul li {
   border: none;
 }
 
+.question-body{
+  margin: 10px 0;
+}
+.answers {
+  margin-top: 20px;
+}
+
+.answers .header {
+  font-weight: bold;
+  border-bottom: 1px solid #57606f;
+}
 .footer {
   margin-top: 10px;
   background: #ecf0f1;
