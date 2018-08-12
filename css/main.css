@@ -16,7 +16,9 @@ body {
 a {
   text-decoration: none;
 }
-
+ul li {
+  list-style: none;
+}
 .clear{
   clear: both;
 }
@@ -118,8 +120,16 @@ a {
   justify-content: space-between;
 }
 
-.profile-flex-container > .column-middle {
-  flex: 2;
+.column-left, .column-right {
+  flex: initial;
+  width: 300px;
+  padding: 10px;
+}
+
+.column-center {
+  flex: 1;
+  flex-grow: 1;
+  padding: 10px;
 }
 
 .column-end {
