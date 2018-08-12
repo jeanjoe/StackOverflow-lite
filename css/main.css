@@ -215,10 +215,11 @@ ul li {
 
 .form-field .input-span{
   display: flex;
+  box-sizing: border-box;
 }
 
 .form-field .input-span input{
-  width: 80%;
+  flex: 1;
   display: inline-block;
   padding: 15px;
   border: none;
@@ -229,7 +230,8 @@ ul li {
   color: #34495e;
   padding: 13px;
   font-size: 12px !important;
-  width: 20% !important;
+  flex: initial;
+  width: 25%;
 }
 
 .form-field label {
