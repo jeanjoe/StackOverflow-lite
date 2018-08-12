@@ -212,6 +212,24 @@ ul li {
   width: 20% !important;
 }
 
+.form-field label {
+  display: block;
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+.form-field input, .form-field textarea {
+  display: block;
+  padding: 10px;
+  border: 1px solid #dfe4ea;
+  background: #f1f2f6;
+  width: 100%;
+}
+
+.form-button{
+  margin: 20px 0;
+}
+
 .column-one {
   flex: 1;
 }
