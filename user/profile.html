@@ -2,22 +2,22 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title>StackOverflow-Lite</title>
-  <link rel="stylesheet" href="css/main.css">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
   <header class="header">
     <nav class="nav fixed-header">
       <div class="container flex-container">
         <div class="brand">
-          <a href="index.html">
+          <a href="../index.html">
             <span class="logo-text">
               Stack<span>Overflow Lite</span>
             </span>
           </a>
         </div>
         <div class="column-middle">
-          <form action="search.html" method="GET">
+          <form action="../search.html" method="GET">
             <div class="flex-container">
               <div class="column-three">
                 <input type="text" class="search" name="search" placeholder="Searching...">
@@ -30,8 +30,8 @@
         </div>
         <div class="column-end">
           <ul class="nav-menu">
-            <li class="nav-menu-item"><a href="signin.html">Log In</a> </li>
-            <li class="nav-menu-item"><a class="button" href="signup.html">Sign up</a> </li>
+            <li class="nav-menu-item"><a href="profile.html">Manzede</a> </li>
+            <li class="nav-menu-item"><a class="button" href="../signin.html">Log Out</a> </li>
           </ul>
         </div>
       </div>
@@ -39,21 +39,6 @@
   </header>
 
   <div class="content">
-    <div class="banner">
-      <div class="container">
-        <form action="search.html" method="GET">
-          <div class="flex-container">
-            <div class="column-three">
-              <input type="text" class="search" name="search" placeholder="Searching...">
-            </div>
-            <div class="column-one">
-              <button type="submit" class="button-search">Search</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-
     <div class="band">
       <div class="container">
         <p><strong>Stack Overflow Business Solutions:</strong> Looking to understand, engage, or hire developers? <strong>Learn more »</strong> </p>
@@ -61,10 +46,25 @@
     </div>
 
     <div class="container margin-top">
-      <div class="flex-container">
+      <div class="profile-flex-container">
+        <div class="column-left">
+          <div class="side-bar">
+            <span><a class="user-email" href="#">manzede@gmail.com</a></span>
+            <div class="items margin-top">
+              <a href="#" class="list-item">Questions (5)</a>
+              <a href="#" class="list-item">Answers (2)</a>
+              <a href="#" class="list-item">Log Out</a>
+            </div>
+          </div>
+        </div>
         <div class="column-center">
-          <p>Searching for <strong>"Flex box using CSS3"</strong>. Results found '4'</p>
-          <hr>
+          <div class="profile-flex-container">
+            <div class="full-column">
+              <a href="#" class="button button-blue text-right">Ask Question</a>
+            </div>
+          </div>
+          <p><strong>Recently asked Questions</strong></p>
+          <hr class="margin-top">
           <ul class="items">
             <li class="item">
               <h4><a href="#">How to add use Flex Box using CSS3</a></h4>
@@ -99,7 +99,7 @@
           </ul>
         </div>
         <div class="column-right">
-          <h6>Most Recent Questions</h6>
+          <h4>Questions with answers</h4>
           <ul class="lists">
             <li class="list-item"><a href="#">How to add side bar in css</a></li>
             <li class="list-item"><a href="#">How to create responsive navigation bar using HTML5 and CSS3</a></li>
