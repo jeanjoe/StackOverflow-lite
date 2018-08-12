@@ -55,7 +55,7 @@ ul li {
   margin: 0 auto !important;
 }
 .container {
-  padding: 0 50px !important;
+  padding: 0 5% !important;
 }
 
 .flex-container{
@@ -212,6 +212,25 @@ ul li {
   width: 20% !important;
 }
 
+.form-field label {
+  display: block;
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+.form-field input, .form-field textarea {
+  display: block;
+  padding: 10px;
+  color: #57606f;
+  border: 1px solid #dfe4ea;
+  background: #f1f2f6;
+  width: 100%;
+}
+
+.form-button{
+  margin: 20px 0;
+}
+
 .column-one {
   flex: 1;
 }
@@ -318,6 +337,17 @@ ul li {
   border: none;
 }
 
+.question-body{
+  margin: 10px 0;
+}
+.answers {
+  margin-top: 20px;
+}
+
+.answers .header {
+  font-weight: bold;
+  border-bottom: 1px solid #57606f;
+}
 .footer {
   margin-top: 10px;
   background: #ecf0f1;

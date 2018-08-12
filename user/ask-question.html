@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title>User Profile</title>
+  <title>Post Question</title>
   <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
@@ -58,45 +58,27 @@
           </div>
         </div>
         <div class="column-center">
-          <div class="profile-flex-container">
-            <div class="full-column">
-              <a href="ask-question.html" class="button button-blue text-right">Ask a question</a>
-            </div>
-          </div>
-          <p><strong>Recently asked Questions</strong></p>
+          <p><strong>Ask a question</strong></p>
           <hr class="margin-top">
-          <ul class="items">
-            <li class="item">
-              <h4><a href="#">How to add use Flex Box using CSS3</a></h4>
-              <a href="#" class="tag ">5 Votes</a>
-              <a href="#" class="tag ">4 Views</a>
-              <a href="#" class="tag ">8 Answers</a>
-              <a href="#" class="tag tag-green">HTML5</a>
-              <a href="#" class="tag tag-green">HTML5</a>
-              <a href="#" class="tag tag-green">CSS3</a>
-              <a href="#" class="tag">Manzede 3 mins ago</a>
-            </li>
-            <li class="item">
-              <h4><a href="#">How to add use Flex Box using CSS3</a></h4>
-              <a href="#" class="tag ">2 Votes</a>
-              <a href="#" class="tag ">2 Views</a>
-              <a href="#" class="tag ">3 Answers</a>
-              <a href="#" class="tag tag-green">HTML5</a>
-              <a href="#" class="tag tag-green">HTML5</a>
-              <a href="#" class="tag tag-green">CSS3</a>
-              <a href="#" class="tag">Manzede 3 mins ago</a>
-            </li>
-            <li class="item">
-              <h4><a href="#">How to add use Flex Box using CSS3</a></h4>
-              <a href="#" class="tag ">6 Votes</a>
-              <a href="#" class="tag ">19 Views</a>
-              <a href="#" class="tag ">7 Answers</a>
-              <a href="#" class="tag tag-green">HTML5</a>
-              <a href="#" class="tag tag-green">HTML5</a>
-              <a href="#" class="tag tag-green">CSS3</a>
-              <a href="#" class="tag">Manzede 3 mins ago</a>
-            </li>
-          </ul>
+          <div class="margin-top">
+            <form class="" action="ask-question.html" method="post">
+              <div class="form-field">
+                <label for="title">Title</label>
+                <input type="text" name="title" value="" placeholder="What's your programming question? Be specific">
+              </div>
+              <div class="form-field">
+                <label for="body">Body</label>
+                <textarea name="body" rows="5" cols="80" placeholder="Give clear description to your question"></textarea>
+              </div>
+              <div class="form-field">
+                <label for="title">Tags</label>
+                <input type="text" name="tags" value="" placeholder="at least on tag such as [HTML5, CSS3]">
+              </div>
+              <div class="form-button">
+                <button type="submit" class="button button-blue text-right">Post your Question</button>
+              </div>
+            </form>
+          </div>
         </div>
         <div class="column-right">
           <h4>Questions with answers</h4>
