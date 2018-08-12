@@ -221,6 +221,7 @@ ul li {
 .form-field input, .form-field textarea {
   display: block;
   padding: 10px;
+  color: #57606f;
   border: 1px solid #dfe4ea;
   background: #f1f2f6;
   width: 100%;
