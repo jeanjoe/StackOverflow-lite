@@ -245,6 +245,7 @@ ul li {
   background: #bdc3c7;
   color: #34495e;
   padding: 13px;
+  font-weight: normal;
   font-size: 12px !important;
   flex: initial;
   width: 25%;
@@ -416,6 +417,7 @@ ul li {
 
     .nav .column-center {
       flex: initial;
+      flex-wrap: wrap;
     }
     .banner .column-two {
       display: none;
