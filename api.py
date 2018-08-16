@@ -34,12 +34,32 @@ def save_question():
             'created_at' : str(datetime.now())
         }    
         questions.append(question)
-        return jsonify({'success': 1, 'data': question}), 201
+        return jsonify({'success': 1, 'questions': question}), 201
 
 #Route to GET All Questions
 @app.route('/api/v1/questions', methods=['GET'])
 def all_questions():
     return jsonify({ 'data' : questions, 'success': 1})
+
+#Route to GET a Specific Question
+@app.route('/api/v1/questions/<int:id>', methods=['GET'])
+def get_question(id):
+    if search_question(id) == False:
+        return jsonify({ 
+            'success': 0, 
+            'message' : 'Unable to find Question with ID {0}'.format(id) 
+            })
+    return jsonify({ 'success': 1, 'question' : search_question(id) }), 200
+
+#Method to Search for a Question and if found, return the Question else return False
+def search_question(id):
+    if len(questions) > 0:
+        try:
+            question = next( question for question in questions if question['id'] == id)
+            return question
+        except:
+            return False
+    return False
 
 if __name__ == '__main__':
     app.run(debug=True)
