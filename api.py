@@ -5,6 +5,38 @@ app = Flask(__name__)
 questions = []
 answers = []
 
+class ManageQuestions():
+    def __init__(self):
+        self.questions = questions
+        self.answers = answers
+    
+    #Method to search for Question Answers if found, return question and answers else return False
+    def question_answers(self, question_ID):
+        if self.search_question == False:
+            return False
+        try:
+            searched_answers = []
+            if len(self.answers) > 0:
+                for i in self.answers:
+                    if i['question_id'] == question_ID:
+                        searched_answers.append(i)
+                return searched_answers
+            return []
+        except:
+            return []
+
+    #Method to Search for a Question and if found, return the Question else return False
+    def search_question(self, question_ID):
+        if len(self.questions) > 0:
+            try:
+                question = next( question for question in self.questions if question['id'] == question_ID)
+                return question
+            except:
+                return False
+        return False
+
+question_manager = ManageQuestions()
+
 #Test API Root Directory
 @app.route('/', methods=['GET'])
 def home():
@@ -45,21 +77,21 @@ def all_questions():
 #Route to GET a Specific Question
 @app.route('/api/v1/questions/<int:id>', methods=['GET'])
 def get_question(id):
-    if search_question(id) == False:
+    if question_manager.search_question(id) == False:
         return jsonify({ 
             'success': 0, 
             'message' : 'Unable to find Question with ID {0}'.format(id) 
             })
     return jsonify({ 
         'success': 1, 
-        'question' : search_question(id),
-        'answers' : question_answers(id)
+        'question' : question_manager.search_question(id),
+        'answers' : question_manager.question_answers(id)
         }), 200
 
 #Route to Delete Question
 @app.route('/api/v1/questions/<int:id>', methods=['DELETE'])
 def delete_question(id):
-    if search_question(id) == False:
+    if question_manager.search_question(id) == False:
         return jsonify({ 
             'success': 0, 
             'message' : 'Unable to find Question with ID {0}'.format(id) 
@@ -68,15 +100,17 @@ def delete_question(id):
     #Validate Author
     if request.args.get('author') is None or not request.args.get('author'):
         return jsonify({ 'success':0, 'message': 'Author ID is required'})
-    if int(request.args['author']) == int(search_question(id)['author']):
-        questions.remove(search_question(id))
+    if int(request.args['author']) == int(question_manager.search_question(id)['author']):
+        questions.remove(question_manager.search_question(id))
         return jsonify({ 'success': 1, 'message': 'Question Removed successfully'}), 202
-    return jsonify({'success': 0, 'message': 'You donot have permission to delete this Question {0}'.format(search_question(id)['author']) }), 401
+    return jsonify({
+        'success': 0, 
+        'message': 'You donot have permission to delete this Question {0}'.format(question_manager.search_question(id)['author']) }), 401
 
 #Route to POST an answer to a Question
 @app.route('/api/v1/questions/<int:question_id>/answers', methods=['POST'])
 def post_answer(question_id):
-    if search_question(question_id) == False:
+    if question_manager.search_question(question_id) == False:
         return jsonify({
             'success': 0, 
             'message': 'Cannot find question with ID {0}'.format(question_id)
@@ -95,7 +129,7 @@ def post_answer(question_id):
 
         answer = {
             'id' : last_id+1,
-            'question_id' : search_question(question_id)['id'],
+            'question_id' : question_manager.search_question(question_id)['id'],
             'author_id' : request.args['author'],
             'answer' : request.args['answer'],
             'prefered_answer' : False,
@@ -108,31 +142,6 @@ def post_answer(question_id):
             'answer': answer, 
             'message': 'Answer posted successfuly'
             })
-
-#Method to search for Question Answers if found, return question and answers else return False
-def question_answers(question_id):
-    if search_question == False:
-        return False
-    try:
-        searched_answers = []
-        if len(answers) > 0:
-            for i in answers:
-                if i['question_id'] == question_id:
-                    searched_answers.append(i)
-            return searched_answers
-        return []
-    except:
-        return []
-
-#Method to Search for a Question and if found, return the Question else return False
-def search_question(id):
-    if len(questions) > 0:
-        try:
-            question = next( question for question in questions if question['id'] == id)
-            return question
-        except:
-            return False
-    return False
 
 if __name__ == '__main__':
     app.run(debug=True)
