@@ -51,6 +51,23 @@ def get_question(id):
             })
     return jsonify({ 'success': 1, 'question' : search_question(id) }), 200
 
+#Route to Delete Question
+@app.route('/api/v1/questions/<int:id>', methods=['DELETE'])
+def delete_question(id):
+    if search_question(id) == False:
+        return jsonify({ 
+            'success': 0, 
+            'message' : 'Unable to find Question with ID {0}'.format(id) 
+            })
+
+    #Validate Author
+    if request.args.get('author') is None or not request.args.get('author'):
+        return jsonify({ 'success':0, 'message': 'Author ID is required'})
+    if int(request.args['author']) == int(search_question(id)['author']):
+        questions.remove(search_question(id))
+        return jsonify({ 'success': 1, 'message': 'Question Removed successfully'}), 202
+    return jsonify({'success': 0, 'message': 'You donot have permission to delete this Question {0}'.format(search_question(id)['author']) }), 401
+
 #Method to Search for a Question and if found, return the Question else return False
 def search_question(id):
     if len(questions) > 0:
