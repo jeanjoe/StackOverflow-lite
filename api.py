@@ -3,6 +3,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 questions = []
+answers = []
 
 #Test API Root Directory
 @app.route('/', methods=['GET'])
@@ -67,6 +68,42 @@ def delete_question(id):
         questions.remove(search_question(id))
         return jsonify({ 'success': 1, 'message': 'Question Removed successfully'}), 202
     return jsonify({'success': 0, 'message': 'You donot have permission to delete this Question {0}'.format(search_question(id)['author']) }), 401
+
+#Route to POST an answer to a Question
+@app.route('/api/v1/questions/<int:question_id>/answers', methods=['POST'])
+def post_answer(question_id):
+    if search_question(question_id) == False:
+        return jsonify({
+            'success': 0, 
+            'message': 'Cannot find question with ID {0}'.format(question_id)
+            })
+    
+    #Validate User Input
+    if request.args.get('author') is None or not request.args.get('author'):
+        return jsonify({ 'success':0, 'message': 'Author ID is required'})
+    elif request.args.get('answer') is None or not request.args.get('answer'):
+        return jsonify({ 'success': 0, 'message': 'Answer is required'})
+    else:
+        #Post the Answer to this Question
+        last_id = 0
+        if len(answers) > 0:
+            last_id = answers[-1]['id']
+
+        answer = {
+            'id' : last_id+1,
+            'question_id' : search_question(question_id)['id'],
+            'author_id' : request.args['author'],
+            'answer' : request.args['answer'],
+            'prefered_answer' : False,
+            'created_at' : str(datetime.now())
+        }    
+        #append answer to answers and return response
+        answers.append(answer)
+        return jsonify({
+            'success': 1, 
+            'answer': answer, 
+            'message': 'Answer posted successfuly'
+            })
 
 #Method to Search for a Question and if found, return the Question else return False
 def search_question(id):
