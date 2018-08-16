@@ -50,7 +50,11 @@ def get_question(id):
             'success': 0, 
             'message' : 'Unable to find Question with ID {0}'.format(id) 
             })
-    return jsonify({ 'success': 1, 'question' : search_question(id) }), 200
+    return jsonify({ 
+        'success': 1, 
+        'question' : search_question(id),
+        'answers' : question_answers(id)
+        }), 200
 
 #Route to Delete Question
 @app.route('/api/v1/questions/<int:id>', methods=['DELETE'])
@@ -104,6 +108,21 @@ def post_answer(question_id):
             'answer': answer, 
             'message': 'Answer posted successfuly'
             })
+
+#Method to search for Question Answers if found, return question and answers else return False
+def question_answers(question_id):
+    if search_question == False:
+        return False
+    try:
+        searched_answers = []
+        if len(answers) > 0:
+            for i in answers:
+                if i['question_id'] == question_id:
+                    searched_answers.append(i)
+            return searched_answers
+        return []
+    except:
+        return []
 
 #Method to Search for a Question and if found, return the Question else return False
 def search_question(id):
