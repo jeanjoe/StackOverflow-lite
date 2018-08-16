@@ -36,5 +36,10 @@ def save_question():
         questions.append(question)
         return jsonify({'success': 1, 'data': question}), 201
 
+#Route to GET All Questions
+@app.route('/api/v1/questions', methods=['GET'])
+def all_questions():
+    return jsonify({ 'data' : questions, 'success': 1})
+
 if __name__ == '__main__':
     app.run(debug=True)
