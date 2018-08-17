@@ -1,4 +1,3 @@
 {
-  "tests/test_api.py::TestApi::test_post_answer": true,
   "tests/tests.py::TestApiEndpoints::test_post_question": true
 }

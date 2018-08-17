@@ -36,7 +36,7 @@ class TestApi(unittest.TestCase):
 
     def test_post_question(self):
         test_data = {
-            'author': 12,
+            'author': 1,
             'title': 'Test Title',
             'body': 'Test text body',
             'tags': 'Test, Python'
@@ -50,12 +50,21 @@ class TestApi(unittest.TestCase):
         self.assertEqual(1, response.json()['success'])
 
     def test_delete_question(self):
-        response = requests.delete(BASE_URL + '/2?author=1')
+        response = requests.delete(BASE_URL + '/3?author=1')
         expected_response = {
             'success': 1,
             'message': 'Question Removed successfully'
         }
         self.assertEqual(expected_response, response.json())
+ 
+    def test_post_answer(self):
+        test_data = {
+            'author': 12,
+            'answer': 'Test answer',
+        }
+        response = requests.post(BASE_URL + '/1/answers', params= test_data)
+        #On successfull Posting, Return success must Equal 1
+        return self.assertEqual(1, response.json()['success'])
 
 if __name__ == '__main__':
     unittest.main()
