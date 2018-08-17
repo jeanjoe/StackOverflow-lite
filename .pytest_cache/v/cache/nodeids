@@ -1,3 +1,4 @@
 [
-  "tests/test_api.py::TestApi::test_get_all_question"
+  "tests/test_api.py::TestApi::test_get_all_question",
+  "tests/test_api.py::TestApi::test_post_question"
 ]

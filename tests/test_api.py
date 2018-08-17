@@ -34,5 +34,16 @@ class TestApi(unittest.TestCase):
         response = requests.get(BASE_URL)
         self.assertIsInstance(response.json(), dict)
 
+    def test_post_question(self):
+        test_data = {
+            'author': 12,
+            'title': 'Test Title',
+            'body': 'Test text body',
+            'tags': 'Test, Python'
+        }
+        response = requests.post(BASE_URL, params= test_data)
+        #On successfull Posting, Return success must Equal 1
+        return self.assertEqual(1, response.json()['success'])
+ 
 if __name__ == '__main__':
     unittest.main()
