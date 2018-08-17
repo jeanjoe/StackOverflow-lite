@@ -1,9 +1,8 @@
 [report]
 omit = 
-    */python?.?/*
-    */site-packages/nose/*
     */__pycache__/*
     */.pyc
+    */.pytest_cache/*
     */.pytest_cache/*
     */tests/__pycache__/*
     */tests/.pytest_cache/*
