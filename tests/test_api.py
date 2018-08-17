@@ -44,6 +44,11 @@ class TestApi(unittest.TestCase):
         response = requests.post(BASE_URL, params= test_data)
         #On successfull Posting, Return success must Equal 1
         return self.assertEqual(1, response.json()['success'])
+    
+    def test_get_specific_question(self):
+        response = requests.get(BASE_URL+'/1')
+        self.assertEqual(1, response.json()['success'])
+
  
 if __name__ == '__main__':
     unittest.main()
