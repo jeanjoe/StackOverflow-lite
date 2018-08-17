@@ -1,1 +1,3 @@
-[]
+[
+  "tests/test_api.py::TestApi::test_get_all_question"
+]
