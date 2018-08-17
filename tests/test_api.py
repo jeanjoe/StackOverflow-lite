@@ -1,10 +1,10 @@
 import unittest, json, requests
 from datetime import datetime
-import api
+import app
 
 BASE_URL = 'http://127.0.0.1:5000/api/v1/questions'
 
-question_manager = api.ManageQuestions()
+question_manager = app.ManageQuestions()
 
 question_data = [
     {
