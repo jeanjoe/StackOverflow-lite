@@ -5,3 +5,5 @@ pylint==2.1.1
 pep8==1.7.1
 pytest-cov==2.5.1
 virtualenv==16.0.0
+requests==2.19.1
+Werkzeug==0.14.1

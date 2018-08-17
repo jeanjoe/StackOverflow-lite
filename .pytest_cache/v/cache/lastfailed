@@ -1,0 +1,8 @@
+{
+  "tests/test_api.py::TestApi::test_delete_question": true,
+  "tests/test_api.py::TestApi::test_get_all_question": true,
+  "tests/test_api.py::TestApi::test_get_specific_question": true,
+  "tests/test_api.py::TestApi::test_post_answer": true,
+  "tests/test_api.py::TestApi::test_post_question": true,
+  "tests/tests.py::TestApiEndpoints::test_post_question": true
+}
