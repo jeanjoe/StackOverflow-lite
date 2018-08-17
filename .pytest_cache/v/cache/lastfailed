@@ -1,0 +1,3 @@
+{
+  "tests/tests.py::TestApiEndpoints::test_post_question": true
+}
