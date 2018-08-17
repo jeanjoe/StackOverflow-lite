@@ -49,6 +49,13 @@ class TestApi(unittest.TestCase):
         response = requests.get(BASE_URL+'/1')
         self.assertEqual(1, response.json()['success'])
 
- 
+    def test_delete_question(self):
+        response = requests.delete(BASE_URL + '/2?author=1')
+        expected_response = {
+            'success': 1,
+            'message': 'Question Removed successfully'
+        }
+        self.assertEqual(expected_response, response.json())
+
 if __name__ == '__main__':
     unittest.main()
