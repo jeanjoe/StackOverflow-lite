@@ -2,11 +2,9 @@ from flask import Flask, jsonify, request, json
 from datetime import datetime
 
 app = Flask(__name__)
-questions = []
-answers = []
 
 class ManageQuestions():
-    def __init__(self):
+    def __init__(self, questions = [], answers = []):
         self.questions = questions
         self.answers = answers
     
@@ -55,8 +53,8 @@ def save_question():
         return jsonify({ 'success': 0, 'message': 'Body is required'})
     else:
         last_id = 0
-        if len(questions) > 0:
-            last_id = questions[-1]['id']
+        if len(question_manager.questions) > 0:
+            last_id = question_manager.questions[-1]['id']
 
         question = {
             'id' : last_id+1,
@@ -66,13 +64,13 @@ def save_question():
             'tags' :request.args.get('tags'),
             'created_at' : str(datetime.now())
         }    
-        questions.append(question)
+        question_manager.questions.append(question)
         return jsonify({'success': 1, 'questions': question}), 201
 
 #Route to GET All Questions
 @app.route('/api/v1/questions', methods=['GET'])
 def all_questions():
-    return jsonify({ 'data' : questions, 'success': 1})
+    return jsonify({ 'data' : question_manager.questions, 'success': 1})
 
 #Route to GET a Specific Question
 @app.route('/api/v1/questions/<int:id>', methods=['GET'])
@@ -101,7 +99,7 @@ def delete_question(id):
     if request.args.get('author') is None or not request.args.get('author'):
         return jsonify({ 'success':0, 'message': 'Author ID is required'})
     if int(request.args['author']) == int(question_manager.search_question(id)['author']):
-        questions.remove(question_manager.search_question(id))
+        question_manager.questions.remove(question_manager.search_question(id))
         return jsonify({ 'success': 1, 'message': 'Question Removed successfully'}), 202
     return jsonify({
         'success': 0, 
@@ -124,8 +122,8 @@ def post_answer(question_id):
     else:
         #Post the Answer to this Question
         last_id = 0
-        if len(answers) > 0:
-            last_id = answers[-1]['id']
+        if len(question_manager.answers) > 0:
+            last_id = question_manager.answers[-1]['id']
 
         answer = {
             'id' : last_id+1,
@@ -136,7 +134,7 @@ def post_answer(question_id):
             'created_at' : str(datetime.now())
         }    
         #append answer to answers and return response
-        answers.append(answer)
+        question_manager.answers.append(answer)
         return jsonify({
             'success': 1, 
             'answer': answer, 
