@@ -1,0 +1,16 @@
+{
+  "name": "StackOverflow-lite",
+  "description": "Andela Stackover flow lite",
+  "scripts": {
+  },
+  "env": {
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ]
+}
