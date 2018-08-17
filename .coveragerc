@@ -1,0 +1,9 @@
+[report]
+omit = 
+    */__pycache__/*
+    */.pyc
+    */.pytest_cache/*
+    */.pytest_cache/*
+    */tests/__pycache__/*
+    */tests/.pytest_cache/*
+    */.vscode/*
