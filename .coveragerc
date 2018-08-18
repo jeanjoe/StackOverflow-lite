@@ -23,4 +23,5 @@ omit =
     */app/__init__.py 
     */env/*
     *//home/travis/virtualenv/*
+    */virtualenv/*
 show_missing = True
