@@ -1,7 +1,0 @@
-[
-  "tests/test_api.py::TestApi::test_delete_question",
-  "tests/test_api.py::TestApi::test_get_all_question",
-  "tests/test_api.py::TestApi::test_get_specific_question",
-  "tests/test_api.py::TestApi::test_post_answer",
-  "tests/test_api.py::TestApi::test_post_question"
-]

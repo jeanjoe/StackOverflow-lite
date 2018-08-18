@@ -1,15 +1,17 @@
+
 language: python
 python:
-  - "3.5"
-  
+  - "3.6"
 # command to install dependencies
 install:
-  - pip install -r requirements.txt
+  - "pip install -r requirements.txt"
+
+
 # command to run tests
 script:
-  - pytest # or py.test for Python versions 3.5 and below
-  - coverage report -m
+   - nosetests --with-coverage --cover-tests
+   - coverage report
 
 
 after_success:
-  - coveralls
+- coveralls

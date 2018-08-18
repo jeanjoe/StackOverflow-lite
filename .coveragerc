@@ -7,3 +7,11 @@ omit =
     */tests/__pycache__/*
     */tests/.pytest_cache/*
     */.vscode/*
+    */certifi/*
+    */chardet/*
+    */idna/*
+    */requests/*
+    */urllib3/*
+    */encodings/*
+    */hmac.py
+    */http/*
