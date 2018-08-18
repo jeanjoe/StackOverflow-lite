@@ -15,3 +15,10 @@ omit =
     */encodings/*
     */hmac.py
     */http/*
+    */mimetypes.py 
+    */netrc.py
+    */stringprep.py 
+    */tests/__init__.py  
+    */app/models.py 
+    */app/__init__.py 
+show_missing = True
