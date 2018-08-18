@@ -66,5 +66,9 @@ class TestApi(unittest.TestCase):
         #On successfull Posting, Return success must Equal 1
         return self.assertEqual(1, response.json()['success'])
 
+    def teardown(self):
+        # teardown here..
+        question_manager.questions = self.api
+
 if __name__ == '__main__':
     unittest.main()
