@@ -1,7 +1,27 @@
+from datetime import datetime
 
+questions = [
+    {
+        "author": 1,
+        'title': 'Does my first Mock Test title Work?',
+        'body': 'Mocking second Test body Text',
+        "created_at": str(datetime.now()),
+        "id": 1,
+        "tags": "html, test, python",
+    },
+    {
+        "author": 1,
+        'title': 'Second Mock Test title seems not Working',
+        'body': 'Mocking second Test body Text',
+        "created_at": str(datetime.now()),
+        "id": 2,
+        "tags": "html, test, python",
+    }
+]
+answers = []
 
 class ManageQuestions():
-    def __init__(self, questions = [], answers = []):
+    def __init__(self):
         self.questions = questions
         self.answers = answers
     
