@@ -21,4 +21,5 @@ omit =
     */tests/__init__.py  
     */app/models.py 
     */app/__init__.py 
+    */env/*
 show_missing = True
