@@ -84,7 +84,6 @@ def post_answer(question_id):
             'success': 0, 
             'message': 'Cannot find question with ID {0}'.format(question_id)
             })
-    
     #Validate User Input
     if request.args.get('author') is None or not request.args.get('author'):
         return jsonify({ 'success':0, 'message': 'Author ID is required'})
@@ -95,7 +94,6 @@ def post_answer(question_id):
         last_id = 0
         if len(question_manager.answers) > 0:
             last_id = question_manager.answers[-1]['id']
-
         answer = {
             'id' : last_id+1,
             'question_id' : question_manager.search_question(question_id)['id'],
