@@ -1,3 +1,4 @@
+[![build-status](https://travis-ci.org/jeanjoe/StackOverflow-lite.svg?branch=develop)
 [![Coverage Status](https://coveralls.io/repos/github/jeanjoe/StackOverflow-lite/badge.svg?branch=develop)](https://coveralls.io/github/jeanjoe/StackOverflow-lite?branch=develop)
 <a href="https://codeclimate.com/github/jeanjoe/StackOverflow-lite/maintainability"><img src="https://api.codeclimate.com/v1/badges/f58c45cf7842e94db189/maintainability" /></a>
 
