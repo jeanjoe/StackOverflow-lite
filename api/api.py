@@ -73,7 +73,7 @@ def post_answer(question_id):
     if question_manager.question_not_found(question_id) is not True:
         return question_manager.question_not_found(question_id)
     #Validate User Input
-    validate = question_manager.validate(['author','body'])
+    validate = question_manager.validate(['author','answer'])
     if validate is not True:
         return jsonify({'success': 0, 'validation': validate})
     
