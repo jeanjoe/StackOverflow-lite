@@ -1,4 +1,4 @@
-[![build-status](https://travis-ci.org/jeanjoe/StackOverflow-lite.svg?branch=develop)
+[build-status](https://travis-ci.org/jeanjoe/StackOverflow-lite.svg?branch=develop)
 [![Coverage Status](https://coveralls.io/repos/github/jeanjoe/StackOverflow-lite/badge.svg?branch=develop)](https://coveralls.io/github/jeanjoe/StackOverflow-lite?branch=develop)
 <a href="https://codeclimate.com/github/jeanjoe/StackOverflow-lite/maintainability"><img src="https://api.codeclimate.com/v1/badges/f58c45cf7842e94db189/maintainability" /></a>
 
@@ -16,40 +16,36 @@ Link to [Pivotal Tracker Board](https://www.pivotaltracker.com/projects/2190229)
 ## How to Use the Endpoint
 
 ##### GET ALL QUESTIONS
-Link https://manzede-stackoverflow-lite.herokuapp.com/api/v1/questions
-
-Method: GET
-
-Parameters: NONE
+```
+* Link https://manzede-stackoverflow-lite.herokuapp.com/api/v1/questions
+* Method: GET
+* Parameters: NONE
+```
 
 ##### POST QUESTION
-
-Link: https://manzede-stackoverflow-lite.herokuapp.com/api/v1/questions
-
-METHOD: POST
-
-PARAMETERS: author(required), title(required), body(required), tags(required)
+```
+* Link: https://manzede-stackoverflow-lite.herokuapp.com/api/v1/questions
+* METHOD: POST
+* PARAMETERS: author(required), title(required), body(required), tags(required)
+```
 
 ##### GET SPECIFIC QUESTION
-
-LINK: https://manzede-stackoverflow-lite.herokuapp.com/api/v1/questions/question_ID
-
-METHOD: GET
-
-PARAMETERS: question_ID (required)
+```
+* LINK: https://manzede-stackoverflow-lite.herokuapp.com/api/v1/questions/question_ID
+* METHOD: GET
+* PARAMETERS: question_ID (required)
+```
 
 ##### DELETE QUESTION
-
-LINK: https://manzede-stackoverflow-lite.herokuapp.com/api/v1/questions/question_ID
-
-METHOD: DELETE
-
-PARAMETERS: question_ID
+```
+* LINK: https://manzede-stackoverflow-lite.herokuapp.com/api/v1/questions/question_ID
+* METHOD: DELETE
+* PARAMETERS: question_ID
+```
 
 ##### POST ANSWER TO A QUESTION
-
-LINK: https://manzede-stackoverflow-lite.herokuapp.com/api/v1/questions/question_ID/answers
-
-METHOD: POST
-
-PARAMETERS: question_ID, autho(required), answer (required)
+```
+* LINK: https://manzede-stackoverflow-lite.herokuapp.com/api/v1/questions/question_ID/answers
+* METHOD: POST
+* PARAMETERS: question_ID, autho(required), answer (required)
+```
