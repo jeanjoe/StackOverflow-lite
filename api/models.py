@@ -1,4 +1,3 @@
-from flask import jsonify
 from datetime import datetime
 
 questions = [
