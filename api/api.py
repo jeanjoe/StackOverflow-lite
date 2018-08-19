@@ -41,7 +41,7 @@ def all_questions():
 #Route to GET a Specific Question
 @app.route('/api/v1/questions/<int:question_id>', methods=['GET'])
 def get_question(question_id):
-    if question_manager.search_question(question_id) == False or question_manager.search_question(question_id) == None:
+    if question_manager.search_question(question_id) == None:
         return jsonify({ 
             'success': 0, 
             'message' : 'Unable to find Question with ID {0}'.format(question_id) 
@@ -55,7 +55,7 @@ def get_question(question_id):
 #Route to Delete Question
 @app.route('/api/v1/questions/<int:question_id>', methods=['DELETE'])
 def delete_question(question_id):
-    if question_manager.search_question(question_id) == False or question_manager.search_question(question_id) == None:
+    if question_manager.search_question(question_id) == None:
         return jsonify({ 
             'success': 0, 
             'message' : 'Unable to find Question with ID {0}'.format(question_id) 
@@ -73,7 +73,7 @@ def delete_question(question_id):
 #Route to POST an answer to a Question
 @app.route('/api/v1/questions/<int:question_id>/answers', methods=['POST'])
 def post_answer(question_id):
-    if question_manager.search_question(question_id) == False or question_manager.search_question(question_id) == None:
+    if question_manager.search_question(question_id) == None:
         return jsonify({ 
             'success': 0, 
             'message' : 'Unable to find Question with ID {0}'.format(question_id) 
