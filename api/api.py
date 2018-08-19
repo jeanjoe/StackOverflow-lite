@@ -15,13 +15,15 @@ def home():
 
 #Route to handle POST Question
 @app.route('/api/v1/questions', methods=['POST'])
-def save_question():
+def post_question():
     if question_manager.validate('title') is not True:
         return question_manager.validate('title')
     if question_manager.validate('body') is not True:
         return question_manager.validate('body')
     if question_manager.validate('author') is not True:
         return question_manager.validate('author')
+    if question_manager.validate('tags') is not True:
+        return question_manager.validate('tags')
     #Post question
     last_id = question_manager.last_id('questions')
     question = {
