@@ -27,16 +27,14 @@ class ManageQuestions():
     
     #Method to search for Question Answers if found, return question and answers else return False
     def question_answers(self, question_ID):
-        if self.search_question == False or self.search_question == None:
-            return False
+        if self.search_question == False or self.search_question == None: return False
             
         searched_answers = []
         if len(self.answers) > 0:
             for i in self.answers:
                 if i['question_id'] == question_ID:
                     searched_answers.append(i)
-            return searched_answers
-        return []
+        return searched_answers
             
     #Method to Search for a Question and if found, return the Question else return False
     def search_question(self, question_ID):

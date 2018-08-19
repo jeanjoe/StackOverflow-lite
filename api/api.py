@@ -18,23 +18,20 @@ def home():
 def save_question():
     if request.args.get('title') is None or not request.args.get('title'):
         return jsonify({ 'success':0, 'message': 'Title field is required'})
-    elif request.args.get('body') is None or not request.args.get('body'):
+    if request.args.get('body') is None or not request.args.get('body'):
         return jsonify({ 'success': 0, 'message': 'Body is required'})
-    else:
-        last_id = 0
-        if len(question_manager.questions) > 0:
-            last_id = question_manager.questions[-1]['id']
-
-        question = {
-            'id' : last_id+1,
-            'author' : 1,
-            'title' : request.args['title'],
-            'body' : request.args.get('body'),
-            'tags' :request.args.get('tags'),
-            'created_at' : str(datetime.now())
-        }    
-        question_manager.questions.append(question)
-        return jsonify({'success': 1, 'questions': question}), 201
+    #Post question
+    last_id = question_manager.questions[-1]['id'] if len(question_manager.questions) > 0 else  0
+    question = {
+        'id' : last_id+1,
+        'author' : 1,
+        'title' : request.args['title'],
+        'body' : request.args.get('body'),
+        'tags' :request.args.get('tags'),
+        'created_at' : str(datetime.now())
+    }    
+    question_manager.questions.append(question)
+    return jsonify({'success': 1, 'questions': question}), 201
 
 #Route to GET All Questions
 @app.route('/api/v1/questions', methods=['GET'])
