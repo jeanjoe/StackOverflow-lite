@@ -84,20 +84,18 @@ def post_answer(question_id):
     #Validate User Input
     if request.args.get('author') is None or not request.args.get('author'):
         return jsonify({ 'success':0, 'message': 'Author ID is required'})
-    elif request.args.get('answer') is None or not request.args.get('answer'):
+    if request.args.get('answer') is None or not request.args.get('answer'):
         return jsonify({ 'success': 0, 'message': 'Answer is required'})
-    else:
-        #Post the Answer to this Question
-        last_id = 0
-        if len(question_manager.answers) > 0:
-            last_id = question_manager.answers[-1]['id']
-        answer = {
-            'id' : last_id+1,
-            'question_id': question_manager.search_question(question_id)['id'],
-            'author_id': request.args['author'], 'answer': request.args['answer'],
-            'prefered_answer': False, 'created_at': str(datetime.now())
-        }    
-        question_manager.answers.append(answer)
-        return jsonify({
-            'success': 1, 'answer': answer, 'message': 'Answer posted successfuly'
-            })
+    
+    #Post the Answer to this Question
+    last_id = question_manager.answers[-1]['id'] if len(question_manager.answers) > 0 else  0
+    answer = {
+        'id' : last_id+1,
+        'question_id': question_manager.search_question(question_id)['id'],
+        'author_id': request.args['author'], 'answer': request.args['answer'],
+        'prefered_answer': False, 'created_at': str(datetime.now())
+    }    
+    question_manager.answers.append(answer)
+    return jsonify({
+        'success': 1, 'answer': answer, 'message': 'Answer posted successfuly'
+        })
