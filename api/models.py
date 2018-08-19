@@ -27,7 +27,7 @@ class ManageQuestions():
     
     #Method to search for Question Answers if found, return question and answers else return False
     def question_answers(self, question_ID):
-        if self.search_question == False:
+        if self.search_question == False or self.search_question == None:
             return False
         try:
             searched_answers = []
