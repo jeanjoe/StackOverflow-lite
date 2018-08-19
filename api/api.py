@@ -16,19 +16,21 @@ def home():
 #Route to handle POST Question
 @app.route('/api/v1/questions', methods=['POST'])
 def save_question():
-    if request.args.get('title') is None or not request.args.get('title'):
-        return jsonify({ 'success':0, 'message': 'Title field is required'})
-    if request.args.get('body') is None or not request.args.get('body'):
-        return jsonify({ 'success': 0, 'message': 'Body is required'})
+    if question_manager.validate('title') is not True:
+        return question_manager.validate('title')
+    if question_manager.validate('body') is not True:
+        return question_manager.validate('body')
+    if question_manager.validate('author') is not True:
+        return question_manager.validate('author')
     #Post question
     last_id = question_manager.last_id('questions')
     question = {
         'id' : last_id+1,
-        'author' : 1,
-        'title' : request.args['title'],
-        'body' : request.args.get('body'),
-        'tags' :request.args.get('tags'),
-        'created_at' : str(datetime.now())
+        'author': request.args['author'],
+        'title': request.args['title'],
+        'body': request.args['body'],
+        'tags':request.args['tags'],
+        'created_at': str(datetime.now())
     }    
     question_manager.questions.append(question)
     return jsonify({'success': 1, 'questions': question}), 201
@@ -36,16 +38,13 @@ def save_question():
 #Route to GET All Questions
 @app.route('/api/v1/questions', methods=['GET'])
 def all_questions():
-    return jsonify({ 'data' : question_manager.questions, 'success': 1})
+    return jsonify({ 'data': question_manager.questions, 'success': 1})
 
 #Route to GET a Specific Question
 @app.route('/api/v1/questions/<int:question_id>', methods=['GET'])
 def get_question(question_id):
-    if question_manager.search_question(question_id) == None:
-        return jsonify({ 
-            'success': 0, 
-            'message' : 'Unable to find Question with ID {0}'.format(question_id) 
-            })
+    if question_manager.question_not_found(question_id) is not True:
+        return question_manager.question_not_found(question_id)
     return jsonify({ 
         'success': 1, 
         'question' : question_manager.search_question(question_id),
@@ -55,11 +54,8 @@ def get_question(question_id):
 #Route to Delete Question
 @app.route('/api/v1/questions/<int:question_id>', methods=['DELETE'])
 def delete_question(question_id):
-    if question_manager.search_question(question_id) == None:
-        return jsonify({ 
-            'success': 0, 
-            'message' : 'Unable to find Question with ID {0}'.format(question_id) 
-            })
+    if question_manager.question_not_found(question_id) is not True:
+        return question_manager.question_not_found(question_id)
     #Validate Author
     if request.args.get('author') is None or not request.args.get('author'):
         return jsonify({ 'success':0, 'message': 'Author ID is required'})
@@ -73,16 +69,13 @@ def delete_question(question_id):
 #Route to POST an answer to a Question
 @app.route('/api/v1/questions/<int:question_id>/answers', methods=['POST'])
 def post_answer(question_id):
-    if question_manager.search_question(question_id) == None:
-        return jsonify({ 
-            'success': 0, 
-            'message' : 'Unable to find Question with ID {0}'.format(question_id) 
-            })
+    if question_manager.question_not_found(question_id) is not True:
+        return question_manager.question_not_found(question_id)
     #Validate User Input
-    if request.args.get('author') is None or not request.args.get('author'):
-        return jsonify({ 'success':0, 'message': 'Author ID is required'})
-    if request.args.get('answer') is None or not request.args.get('answer'):
-        return jsonify({ 'success': 0, 'message': 'Answer is required'})
+    if question_manager.validate('author') is not True:
+        return question_manager.validate('author')
+    if question_manager.validate('answer') is not True:
+        return question_manager.validate('answer')
     
     #Post the Answer to this Question
     last_id = question_manager.last_id('answers')

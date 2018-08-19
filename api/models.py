@@ -1,3 +1,4 @@
+from flask import request, jsonify
 from datetime import datetime
 
 questions = [
@@ -41,3 +42,16 @@ class ManageQuestions():
         if search_type == 'answers':
             return self.answers[-1]['id'] if len(self.answers) > 0 else  0
         return self.questions[-1]['id'] if len(self.questions) > 0 else  0
+
+    def validate(self, data):
+        if request.args.get(data) is None or not request.args.get(data):
+            return jsonify({ 'success':0, 'message': data + ' is required'})
+        return True
+
+    def question_not_found(self, question_id):
+        if self.search_question(question_id) == None:
+            return jsonify({ 
+                'success': 0, 
+                'message' : 'Unable to find Question with ID {0}'.format(question_id) 
+                })
+        return True
