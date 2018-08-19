@@ -43,9 +43,6 @@ class ManageQuestions():
     #Method to Search for a Question and if found, return the Question else return False
     def search_question(self, question_ID):
         if len(self.questions) > 0:
-            try:
-                question = next( question for question in self.questions if question['id'] == question_ID)
-                return question
-            except:
-                return False
+            question = next((question for question in self.questions if question['id'] == question_ID), None)
+            return question
         return False
