@@ -47,9 +47,14 @@ class ManageQuestions():
         return  0
 
     #Validate User Inputs
-    def validate(self, data):
-        if request.args.get(data) is None or not request.args.get(data):
-            return jsonify({ 'success':0, 'message': data + ' is required'})
+    def validate(self, data = []):
+        error_message = []
+        for i in data:
+            if request.args.get(i) is None or not request.args.get(i):
+                error_message.append({ 'field' : i, 'message': i + ' is required' })
+        #return Value
+        if len(error_message) > 0:
+            return error_message
         return True
 
     #If Question not found, return this error

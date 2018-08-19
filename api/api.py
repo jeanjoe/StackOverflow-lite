@@ -16,14 +16,11 @@ def home():
 #Route to handle POST Question
 @app.route('/api/v1/questions', methods=['POST'])
 def post_question():
-    if question_manager.validate('title') is not True:
-        return question_manager.validate('title')
-    if question_manager.validate('body') is not True:
-        return question_manager.validate('body')
-    if question_manager.validate('author') is not True:
-        return question_manager.validate('author')
-    if question_manager.validate('tags') is not True:
-        return question_manager.validate('tags')
+    #Validate user input
+    validate = question_manager.validate(['title','body','author','author','tags'])
+    if validate is not True:
+        return jsonify({'success': 0, 'validation': validate})
+
     #Post question
     last_id = question_manager.last_id('questions')
     question = {
@@ -35,9 +32,7 @@ def post_question():
         'created_at': str(datetime.now())
     }    
     question_manager.questions.append(question)
-    return jsonify({
-        'success': 1, 'question': question
-        }), 201
+    return jsonify({'success': 1, 'question': question}), 201
 
 #Route to GET All Questions
 @app.route('/api/v1/questions', methods=['GET'])
@@ -68,18 +63,19 @@ def delete_question(question_id):
         return jsonify({ 'success': 1, 'message': 'Question Removed successfully'}), 202
     return jsonify({
         'success': 0, 
-        'message': 'You donot have permission to delete this Question {0}'.format(question_manager.search_question(question_id)['author']) }), 401
+        'message': 'You donot have permission to delete this Question {0}'.format(question_manager.search_question(question_id)['author']) 
+        }), 401
 
 #Route to POST an answer to a Question
 @app.route('/api/v1/questions/<int:question_id>/answers', methods=['POST'])
 def post_answer(question_id):
+    #check if question exists
     if question_manager.question_not_found(question_id) is not True:
         return question_manager.question_not_found(question_id)
     #Validate User Input
-    if question_manager.validate('author') is not True:
-        return question_manager.validate('author')
-    if question_manager.validate('answer') is not True:
-        return question_manager.validate('answer')
+    validate = question_manager.validate(['author','body'])
+    if validate is not True:
+        return jsonify({'success': 0, 'validation': validate})
     
     #Post the Answer to this Question
     last_id = question_manager.last_id('answers')
