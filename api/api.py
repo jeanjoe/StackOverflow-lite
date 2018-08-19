@@ -3,7 +3,6 @@ from datetime import datetime
 from .models import ManageQuestions
 
 app = Flask(__name__)
-
 question_manager = ManageQuestions()
 
 #Test API Root Directory
@@ -13,7 +12,6 @@ def home():
         'message': 'Kudos, API endpoints Work. Follow /api/v1/questions to get Questions', 
         'success': 1 
         })
-
 
 #Route to handle POST Question
 @app.route('/api/v1/questions', methods=['POST'])
@@ -44,45 +42,44 @@ def all_questions():
     return jsonify({ 'data' : question_manager.questions, 'success': 1})
 
 #Route to GET a Specific Question
-@app.route('/api/v1/questions/<int:id>', methods=['GET'])
-def get_question(id):
-    if question_manager.search_question(id) == False or question_manager.search_question(id) == None:
+@app.route('/api/v1/questions/<int:question_id>', methods=['GET'])
+def get_question(question_id):
+    if question_manager.search_question(question_id) == False or question_manager.search_question(question_id) == None:
         return jsonify({ 
             'success': 0, 
-            'message' : 'Unable to find Question with ID {0}'.format(id) 
+            'message' : 'Unable to find Question with ID {0}'.format(question_id) 
             })
     return jsonify({ 
         'success': 1, 
-        'question' : question_manager.search_question(id),
-        'answers' : question_manager.question_answers(id)
+        'question' : question_manager.search_question(question_id),
+        'answers' : question_manager.question_answers(question_id)
         }), 200
 
 #Route to Delete Question
-@app.route('/api/v1/questions/<int:id>', methods=['DELETE'])
-def delete_question(id):
-    if question_manager.search_question(id) == False or question_manager.search_question(id) == None:
+@app.route('/api/v1/questions/<int:question_id>', methods=['DELETE'])
+def delete_question(question_id):
+    if question_manager.search_question(question_id) == False or question_manager.search_question(question_id) == None:
         return jsonify({ 
             'success': 0, 
-            'message' : 'Unable to find Question with ID {0}'.format(id) 
+            'message' : 'Unable to find Question with ID {0}'.format(question_id) 
             })
-
     #Validate Author
     if request.args.get('author') is None or not request.args.get('author'):
         return jsonify({ 'success':0, 'message': 'Author ID is required'})
-    if int(request.args['author']) == int(question_manager.search_question(id)['author']):
-        question_manager.questions.remove(question_manager.search_question(id))
+    if int(request.args['author']) == int(question_manager.search_question(question_id)['author']):
+        question_manager.questions.remove(question_manager.search_question(question_id))
         return jsonify({ 'success': 1, 'message': 'Question Removed successfully'}), 202
     return jsonify({
         'success': 0, 
-        'message': 'You donot have permission to delete this Question {0}'.format(question_manager.search_question(id)['author']) }), 401
+        'message': 'You donot have permission to delete this Question {0}'.format(question_manager.search_question(question_id)['author']) }), 401
 
 #Route to POST an answer to a Question
 @app.route('/api/v1/questions/<int:question_id>/answers', methods=['POST'])
 def post_answer(question_id):
     if question_manager.search_question(question_id) == False or question_manager.search_question(question_id) == None:
-        return jsonify({
+        return jsonify({ 
             'success': 0, 
-            'message': 'Cannot find question with ID {0}'.format(question_id)
+            'message' : 'Unable to find Question with ID {0}'.format(question_id) 
             })
     #Validate User Input
     if request.args.get('author') is None or not request.args.get('author'):
@@ -96,16 +93,11 @@ def post_answer(question_id):
             last_id = question_manager.answers[-1]['id']
         answer = {
             'id' : last_id+1,
-            'question_id' : question_manager.search_question(question_id)['id'],
-            'author_id' : request.args['author'],
-            'answer' : request.args['answer'],
-            'prefered_answer' : False,
-            'created_at' : str(datetime.now())
+            'question_id': question_manager.search_question(question_id)['id'],
+            'author_id': request.args['author'], 'answer': request.args['answer'],
+            'prefered_answer': False, 'created_at': str(datetime.now())
         }    
-        #append answer to answers and return response
         question_manager.answers.append(answer)
         return jsonify({
-            'success': 1, 
-            'answer': answer, 
-            'message': 'Answer posted successfuly'
+            'success': 1, 'answer': answer, 'message': 'Answer posted successfuly'
             })
