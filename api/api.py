@@ -35,7 +35,9 @@ def post_question():
         'created_at': str(datetime.now())
     }    
     question_manager.questions.append(question)
-    return jsonify({'success': 1, 'questions': question}), 201
+    return jsonify({
+        'success': 1, 'question': question
+        }), 201
 
 #Route to GET All Questions
 @app.route('/api/v1/questions', methods=['GET'])
