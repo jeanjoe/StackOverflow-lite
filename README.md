@@ -1,3 +1,5 @@
+<a href="https://codeclimate.com/github/jeanjoe/StackOverflow-lite/maintainability"><img src="https://api.codeclimate.com/v1/badges/f58c45cf7842e94db189/maintainability" /></a>
+
 # StackOverflow-lite
 StackOverflow-lite is a platform where people can ask questions and provide answers.
 
