@@ -21,7 +21,7 @@ def save_question():
     if request.args.get('body') is None or not request.args.get('body'):
         return jsonify({ 'success': 0, 'message': 'Body is required'})
     #Post question
-    last_id = question_manager.questions[-1]['id'] if len(question_manager.questions) > 0 else  0
+    last_id = question_manager.last_id('questions')
     question = {
         'id' : last_id+1,
         'author' : 1,
@@ -85,7 +85,7 @@ def post_answer(question_id):
         return jsonify({ 'success': 0, 'message': 'Answer is required'})
     
     #Post the Answer to this Question
-    last_id = question_manager.answers[-1]['id'] if len(question_manager.answers) > 0 else  0
+    last_id = question_manager.last_id('answers')
     answer = {
         'id' : last_id+1,
         'question_id': question_manager.search_question(question_id)['id'],
