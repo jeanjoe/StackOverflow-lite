@@ -38,16 +38,21 @@ class ManageQuestions():
         question = next((question for question in self.questions if question['id'] == question_ID), None)
         return question
 
+    #Get last id of Datalists
     def last_id(self, search_type):
         if search_type == 'answers':
             return self.answers[-1]['id'] if len(self.answers) > 0 else  0
-        return self.questions[-1]['id'] if len(self.questions) > 0 else  0
+        if len(self.questions) > 0:
+            return self.questions[-1]['id']
+        return  0
 
+    #Validate User Inputs
     def validate(self, data):
         if request.args.get(data) is None or not request.args.get(data):
             return jsonify({ 'success':0, 'message': data + ' is required'})
         return True
 
+    #If Question not found, return this error
     def question_not_found(self, question_id):
         if self.search_question(question_id) == None:
             return jsonify({ 
