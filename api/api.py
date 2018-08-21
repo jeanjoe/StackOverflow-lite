@@ -37,7 +37,7 @@ def post_question():
 #Route to GET All Questions
 @app.route('/api/v1/questions', methods=['GET'])
 def all_questions():
-    return jsonify({ 'data': question_manager.questions, 'success': 1})
+    return jsonify({ 'question': question_manager.questions, 'success': 1})
 
 #Route to GET a Specific Question
 @app.route('/api/v1/questions/<int:question_id>', methods=['GET'])

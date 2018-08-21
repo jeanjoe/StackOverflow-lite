@@ -2,15 +2,34 @@ import unittest, json, requests
 from datetime import datetime
 from api.models import ManageQuestions
 
-# BASE_URL = 'http://127.0.0.1:5000/api/v1/questions'
-BASE_URL = 'https://manzede-stackoverflow-lite.herokuapp.com/api/v1/questions'
+BASE_URL = 'http://127.0.0.1:5000/api/v1/questions'
+# BASE_URL = 'https://manzede-stackoverflow-lite.herokuapp.com/api/v1/questions'
 
 question_manager = ManageQuestions()
+questions = [
+    {
+        "author": 1,
+        'title': 'Does my first Mock Test title Work?',
+        'body': 'Mocking second Test body Text',
+        "created_at": str(datetime.now()),
+        "id": 1,
+        "tags": "html, test, python",
+    },
+    {
+        "author": 1,
+        'title': 'Second Mock Test title seems not Working',
+        'body': 'Mocking second Test body Text',
+        "created_at": str(datetime.now()),
+        "id": 2,
+        "tags": "html, test, python",
+    }
+]
+question_manager.questions = questions
 
 class TestApi(unittest.TestCase):
 
     def setUp(self):
-        self.api = question_manager.questions
+        self.questions = question_manager.questions
 
     def test_get_all_question(self):
         response = requests.get(BASE_URL)
@@ -74,7 +93,7 @@ class TestApi(unittest.TestCase):
 
     def teardown(self):
         # teardown here..
-        question_manager.questions = self.api
+        question_manager.questions = self.questions
 
 if __name__ == '__main__':
     unittest.main()
