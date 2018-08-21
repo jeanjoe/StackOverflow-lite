@@ -37,7 +37,7 @@ def post_question():
 #Route to GET All Questions
 @app.route('/api/v1/questions', methods=['GET'])
 def all_questions():
-    return jsonify({ 'question': question_manager.questions, 'success': 1})
+    return jsonify({ 'question': question_manager.questions, 'success': 1}, 200)
 
 #Route to GET a Specific Question
 @app.route('/api/v1/questions/<int:question_id>', methods=['GET'])
@@ -60,7 +60,7 @@ def delete_question(question_id):
         return jsonify({ 'success':0, 'message': 'Author ID is required'})
     if int(request.args['author']) == int(question_manager.search_question(question_id)['author']):
         question_manager.questions.remove(question_manager.search_question(question_id))
-        return jsonify({ 'success': 1, 'message': 'Question Removed successfully'}), 202
+        return jsonify({ 'success': 1, 'message': 'Question Removed successfully'}), 200
     return jsonify({
         'success': 0, 
         'message': 'You donot have permission to delete this Question {0}'.format(question_manager.search_question(question_id)['author']) 
@@ -75,7 +75,7 @@ def post_answer(question_id):
     #Validate User Input
     validate = question_manager.validate(['author','answer'])
     if validate is not True:
-        return jsonify({'success': 0, 'validation': validate})
+        return jsonify({'success': 0, 'validation': validate}, 200)
     
     #Post the Answer to this Question
     last_id = question_manager.last_id('answers')
@@ -88,4 +88,4 @@ def post_answer(question_id):
     question_manager.answers.append(answer)
     return jsonify({
         'success': 1, 'answer': answer, 'message': 'Answer posted successfuly'
-        })
+        }, 200)
