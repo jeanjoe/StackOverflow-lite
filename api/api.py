@@ -1,9 +1,12 @@
 from flask import Flask, jsonify, request, json
 from datetime import datetime
-from .models import ManageQuestions
+import uuid
+from .models import ManageQuestions, ManageUser, Validator
 
 app = Flask(__name__)
 question_manager = ManageQuestions()
+user_manager = ManageUser()
+validation = Validator()
 
 #Test API Root Directory
 @app.route('/', methods=['GET'])
@@ -17,8 +20,8 @@ def home():
 @app.route('/api/v1/questions', methods=['POST'])
 def post_question():
     #Validate user input
-    validate = question_manager.validate(['title','body','author','author','tags'])
-    if validate is not True:
+    validate = validation.required(['title','body','author','author','tags'])
+    if len(validate):
         return jsonify({'success': 0, 'validation': validate})
 
     #Post question
@@ -73,8 +76,8 @@ def post_answer(question_id):
     if question_manager.question_not_found(question_id) is not True:
         return question_manager.question_not_found(question_id)
     #Validate User Input
-    validate = question_manager.validate(['author','answer'])
-    if validate is not True:
+    validate = validation.required(['author','answer'])
+    if len(validate) > 0:
         return jsonify({'success': 0, 'validation': validate}, 200)
     
     #Post the Answer to this Question
@@ -88,4 +91,22 @@ def post_answer(question_id):
     question_manager.answers.append(answer)
     return jsonify({
         'success': 1, 'answer': answer, 'message': 'Answer posted successfuly'
-        }, 200)
+        }), 200
+
+#Add User authentication endpoints
+@app.route('/api/v1/auth/signup', methods=['POST'])
+def signup():
+    #Validate User Input
+    validate = validation.required(['name', 'email', 'password'])
+    if len(validate) > 0:
+        return jsonify({'success': 0, 'validation': validate}), 200 
+    user = {
+        # make a UUID based on the host ID and current time
+        'id': uuid.uuid1(),
+        'display_name': request.args['name'],
+        'email': request.args['email'],
+        'password': request.args['password']
+    }
+
+    user_manager.users.append(user)
+    return jsonify({'user': user})

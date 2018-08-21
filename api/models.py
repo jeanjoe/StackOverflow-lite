@@ -29,17 +29,6 @@ class ManageQuestions():
             return self.questions[-1]['id']
         return  0
 
-    #Validate User Inputs
-    def validate(self, data = []):
-        error_message = []
-        for i in data:
-            if request.args.get(i) is None or not request.args.get(i):
-                error_message.append({ 'field' : i, 'message': i + ' is required' })
-        #return Value
-        if len(error_message) > 0:
-            return error_message
-        return True
-
     #If Question not found, return this error
     def question_not_found(self, question_id):
         if self.search_question(question_id) == None:
@@ -48,3 +37,21 @@ class ManageQuestions():
                 'message' : 'Unable to find Question with ID {0}'.format(question_id) 
                 })
         return True
+
+#User class
+class ManageUser():
+    def __init__(self, users = []):
+        self.users = users
+
+    def get_user(self):
+        return jsonify({ 'users': 'manzede'})
+
+class Validator():
+    #Validate User Inputs
+    def required(self, data = []):
+        error_message = []
+        for i in data:
+            if request.args.get(i) is None or not request.args.get(i):
+                error_message.append({ 'field' : i, 'message': i + ' is required' })
+        #return errors
+        return error_message
