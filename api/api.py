@@ -14,15 +14,15 @@ def home():
     return jsonify({
         'message': 'Kudos, API endpoints Work. Follow /api/v1/questions to get Questions', 
         'success': 1 
-        })
+        }), 200
 
 #Route to handle POST Question
 @app.route('/api/v1/questions', methods=['POST'])
 def post_question():
     #Validate user input
-    validate = validation.required(['title','body','author','author','tags'])
+    validate = validation.required(['title','body','author','tags'])
     if len(validate):
-        return jsonify({'success': 0, 'validation': validate})
+        return jsonify({'success': 0, 'validation': validate}), 200
 
     #Post question
     last_id = question_manager.last_id('questions')
@@ -40,13 +40,13 @@ def post_question():
 #Route to GET All Questions
 @app.route('/api/v1/questions', methods=['GET'])
 def all_questions():
-    return jsonify({ 'question': question_manager.questions, 'success': 1}, 200)
+    return jsonify({ 'question': question_manager.questions, 'success': 1}), 200
 
 #Route to GET a Specific Question
 @app.route('/api/v1/questions/<int:question_id>', methods=['GET'])
 def get_question(question_id):
     if question_manager.question_not_found(question_id) is not True:
-        return question_manager.question_not_found(question_id)
+        return question_manager.question_not_found(question_id), 404
     return jsonify({ 
         'success': 1, 
         'question' : question_manager.search_question(question_id),
@@ -57,7 +57,7 @@ def get_question(question_id):
 @app.route('/api/v1/questions/<int:question_id>', methods=['DELETE'])
 def delete_question(question_id):
     if question_manager.question_not_found(question_id) is not True:
-        return question_manager.question_not_found(question_id)
+        return question_manager.question_not_found(question_id), 404
     #Validate Author
     if request.args.get('author') is None or not request.args.get('author'):
         return jsonify({ 'success':0, 'message': 'Author ID is required'})
@@ -74,11 +74,11 @@ def delete_question(question_id):
 def post_answer(question_id):
     #check if question exists
     if question_manager.question_not_found(question_id) is not True:
-        return question_manager.question_not_found(question_id)
+        return question_manager.question_not_found(question_id), 404
     #Validate User Input
     validate = validation.required(['author','answer'])
     if len(validate) > 0:
-        return jsonify({'success': 0, 'validation': validate}, 200)
+        return jsonify({'success': 0, 'validation': validate}), 200
     
     #Post the Answer to this Question
     last_id = question_manager.last_id('answers')
