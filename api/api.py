@@ -17,7 +17,7 @@ def home():
 @app.route('/api/v1/questions', methods=['POST'])
 def post_question():
     #Validate user input
-    validate = question_manager.validate(['title','body','author','author','tags'])
+    validate = question_manager.validate(['title','body','author','tags'])
     if validate is not True:
         return jsonify({'success': 0, 'validation': validate})
 
@@ -37,7 +37,7 @@ def post_question():
 #Route to GET All Questions
 @app.route('/api/v1/questions', methods=['GET'])
 def all_questions():
-    return jsonify({ 'data': question_manager.questions, 'success': 1})
+    return jsonify({ 'question': question_manager.questions, 'success': 1})
 
 #Route to GET a Specific Question
 @app.route('/api/v1/questions/<int:question_id>', methods=['GET'])
