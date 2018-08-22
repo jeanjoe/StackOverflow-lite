@@ -24,10 +24,12 @@ questions = [
         "tags": "html, test, python",
     }
 ]
+question_manager.questions = questions
+
 class TestApi(unittest.TestCase):
 
     def setUp(self):
-        self.api = question_manager.questions
+        self.questions = question_manager.questions
 
     def test_get_all_question(self):
         response = requests.get(BASE_URL)
@@ -91,7 +93,7 @@ class TestApi(unittest.TestCase):
 
     def teardown(self):
         # teardown here..
-        question_manager.questions = self.api
+        question_manager.questions = self.questions
 
 if __name__ == '__main__':
     unittest.main()
