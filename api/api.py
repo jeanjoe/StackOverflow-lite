@@ -45,8 +45,8 @@ def all_questions():
 #Route to GET a Specific Question
 @app.route('/api/v1/questions/<int:question_id>', methods=['GET'])
 def get_question(question_id):
-    if question_manager.question_not_found(question_id) is not True:
-        return question_manager.question_not_found(question_id), 404
+    if question_manager.search_question(question_id) is not True:
+        return question_manager.search_question(question_id), 404
     return jsonify({ 
         'success': 1, 
         'question' : question_manager.search_question(question_id),
@@ -56,8 +56,8 @@ def get_question(question_id):
 #Route to Delete Question
 @app.route('/api/v1/questions/<int:question_id>', methods=['DELETE'])
 def delete_question(question_id):
-    if question_manager.question_not_found(question_id) is not True:
-        return question_manager.question_not_found(question_id), 404
+    if question_manager.search_question(question_id) is not True:
+        return question_manager.search_question(question_id), 404
     #Validate Author
     if request.args.get('author') is None or not request.args.get('author'):
         return jsonify({ 'success':0, 'message': 'Author ID is required'})
@@ -73,8 +73,8 @@ def delete_question(question_id):
 @app.route('/api/v1/questions/<int:question_id>/answers', methods=['POST'])
 def post_answer(question_id):
     #check if question exists
-    if question_manager.question_not_found(question_id) is not True:
-        return question_manager.question_not_found(question_id), 404
+    if question_manager.search_question(question_id) is not True:
+        return question_manager.search_question(question_id), 404
     #Validate User Input
     validate = validation.required(['author','answer'])
     if len(validate) > 0:

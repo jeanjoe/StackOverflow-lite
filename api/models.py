@@ -17,7 +17,7 @@ class ManageQuestions():
         return searched_answers
             
     #Method to Search for a Question and if found, return the Question else return False
-    def search_question(self, question_ID):
+    def get_a_question(self, question_ID):
         question = next((question for question in self.questions if question['id'] == question_ID), None)
         return question
 
@@ -30,8 +30,8 @@ class ManageQuestions():
         return  0
 
     #If Question not found, return this error
-    def question_not_found(self, question_id):
-        if self.search_question(question_id) == None:
+    def search_question(self, question_id):
+        if self.get_a_question(question_id) == None:
             return jsonify({ 
                 'success': 0, 
                 'message' : 'Unable to find Question with ID {0}'.format(question_id) 
