@@ -45,7 +45,7 @@ def all_questions():
     return jsonify({ 'question': question_manager.questions, 'success': 1}), 200
 
 #Route to GET a Specific Question
-@app.route('/api/v1/questions/<int:question_id>', methods=['GET'])
+@app.route('/api/v1/questions/<question_id>', methods=['GET'])
 def get_question(question_id):
     if question_manager.search_question(question_id) is not True:
         return question_manager.search_question(question_id), 404
@@ -56,7 +56,7 @@ def get_question(question_id):
         }), 200
 
 #Route to Delete Question
-@app.route('/api/v1/questions/<int:question_id>', methods=['DELETE'])
+@app.route('/api/v1/questions/<question_id>', methods=['DELETE'])
 def delete_question(question_id):
     if question_manager.search_question(question_id) is not True:
         return question_manager.search_question(question_id), 404
@@ -72,7 +72,7 @@ def delete_question(question_id):
         }), 401
 
 #Route to POST an answer to a Question
-@app.route('/api/v1/questions/<int:question_id>/answers', methods=['POST'])
+@app.route('/api/v1/questions/<question_id>/answers', methods=['POST'])
 def post_answer(question_id):
     #check if question exists
     if question_manager.search_question(question_id) is not True:
