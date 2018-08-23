@@ -83,7 +83,7 @@ def post_answer(question_id):
         return jsonify({'success': 0, 'validation': validate}), 200
 
     if validation.unique('answers', request.args['answer'], 'answer') is not None:
-        return jsonify({ 'message': 'This question has already been given, please try another.' })
+        return jsonify({ 'message': 'This answer has already been given, please try another.' })
     
     #Post the Answer to this Question
     answer = {
