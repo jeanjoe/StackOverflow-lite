@@ -109,5 +109,4 @@ def signup():
     }
 
     user_manager.users.append(user)
-    return jsonify({'user': user})
-        }), 200
+    return jsonify({'user': user}), 200
