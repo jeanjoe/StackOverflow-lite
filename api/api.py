@@ -23,11 +23,13 @@ def post_question():
     validate = validation.required(['title','body','author','tags'])
     if len(validate):
         return jsonify({'success': 0, 'validation': validate}), 200
+    
+    if validation.unique('questions', request.args['title'], 'title') is not None:
+        return jsonify({ 'message': 'This question has already been asked, please try another.' }), 200
 
     #Post question
-    last_id = question_manager.last_id('questions')
     question = {
-        'id' : last_id+1,
+        'id' : uuid.uuid1(),
         'author': request.args['author'],
         'title': request.args['title'],
         'body': request.args['body'],
@@ -79,11 +81,13 @@ def post_answer(question_id):
     validate = validation.required(['author','answer'])
     if len(validate) > 0:
         return jsonify({'success': 0, 'validation': validate}), 200
+
+    if validation.unique('answers', request.args['answer'], 'answer') is not None:
+        return jsonify({ 'message': 'This question has already been given, please try another.' })
     
     #Post the Answer to this Question
-    last_id = question_manager.last_id('answers')
     answer = {
-        'id' : last_id+1,
+        'id' : uuid.uuid1(),
         'question_id': question_manager.search_question(question_id)['id'],
         'author_id': request.args['author'], 'answer': request.args['answer'],
         'prefered_answer': False, 'created_at': str(datetime.now())

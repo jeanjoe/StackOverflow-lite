@@ -47,6 +47,10 @@ class ManageUser():
         return jsonify({ 'users': 'manzede'})
 
 class Validator():
+    def __init__(self):
+        self.questions = questions
+        self.answers = answers
+        
     #Validate User Inputs
     def required(self, data = []):
         error_message = []
@@ -55,3 +59,9 @@ class Validator():
                 error_message.append({ 'field' : i, 'message': i + ' is required' })
         #return errors
         return error_message
+    
+    def unique(self, search_from, data, field):
+        list_holder = self.questions
+        if search_from =='answers':
+            list_holder = self.answers
+        return next((item for item in list_holder if item[field] == data), None)
