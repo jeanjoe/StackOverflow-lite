@@ -15,20 +15,27 @@ class ManageQuestions():
         for i in self.answers:
             if i['question_id'] == question_ID: searched_answers.append(i)
         return searched_answers
-            
-    #Method to Search for a Question and if found, return the Question else return False
-    def get_a_question(self, question_ID):
-        question = next((question for question in self.questions if question['id'] == question_ID), None)
-        return question
-
+     
     #If Question not found, return this error
-    def search_question(self, question_id):
-        if self.get_a_question(question_id) == None:
+    def question_not_found(self, question_id):
+        if self.search_question(question_id) == None:
             return jsonify({ 
                 'success': 0, 
                 'message' : 'Unable to find Question with ID {0}'.format(question_id) 
                 })
         return True
+               
+    #Method to Search for a Question and if found, return the Question else return False
+    def search_question(self, question_id):
+        question = next((question for question in self.questions if str(question['id']) == str(question_id)), None)
+        return question
+
+    def last_id(self, search_type):
+        if search_type == 'answers':
+            return self.answers[-1]['id'] if len(self.answers) > 0 else  0
+        if search_type == 'questions':
+            return self.questions[-1]['id'] if len(self.questions) > 0 else  0
+        return 0 
 
 #User class
 class ManageUser():
@@ -47,7 +54,10 @@ class Validator():
     def required(self, data = []):
         error_message = []
         for i in data:
-            if request.args.get(i) is None or not request.args.get(i):
+            try:
+                input = request.get_json()
+                input[i]
+            except:
                 error_message.append({ 'field' : i, 'message': i + ' is required' })
         #return errors
         return error_message
