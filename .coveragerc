@@ -35,12 +35,12 @@ omit =
     */concurrent/*
     */ctypes.py
     */ctypes/*
-    html.py
     */html.py
     */html/entities.py
     */multiprocessing/connection.py
     */multiprocessing/util.py 
     */numbers.py
-    */uuid.py 
+    */uuid.py
+    */app.py 
     
 show_missing = True
