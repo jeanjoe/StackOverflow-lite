@@ -23,17 +23,18 @@ def post_question():
     validate = validation.required(['title','body','author','tags'])
     if len(validate):
         return jsonify({'success': 0, 'validation': validate}), 200
-    
-    if validation.unique('questions', request.args['title'], 'title') is not None:
+    data = request.get_json()
+    if validation.unique('questions', data['title'], 'title') is not None:
         return jsonify({ 'message': 'This question has already been asked, please try another.' }), 200
-
+    
     #Post question
+    last_id = question_manager.last_id('questions')
     question = {
-        'id' : uuid.uuid1(),
-        'author': request.args['author'],
-        'title': request.args['title'],
-        'body': request.args['body'],
-        'tags':request.args['tags'],
+        'id' : last_id+1,
+        'author': data['author'],
+        'title': data['title'],
+        'body': data['body'],
+        'tags': data['tags'],
         'created_at': str(datetime.now())
     }    
     question_manager.questions.append(question)
@@ -47,8 +48,8 @@ def all_questions():
 #Route to GET a Specific Question
 @app.route('/api/v1/questions/<question_id>', methods=['GET'])
 def get_question(question_id):
-    if question_manager.search_question(question_id) is not True:
-        return question_manager.search_question(question_id), 404
+    if question_manager.question_not_found(question_id) is not True:
+        return question_manager.question_not_found(question_id), 404
     return jsonify({ 
         'success': 1, 
         'question' : question_manager.search_question(question_id),
@@ -58,43 +59,47 @@ def get_question(question_id):
 #Route to Delete Question
 @app.route('/api/v1/questions/<question_id>', methods=['DELETE'])
 def delete_question(question_id):
-    if question_manager.search_question(question_id) is not True:
-        return question_manager.search_question(question_id), 404
+    if question_manager.question_not_found(question_id) is not True:
+        return question_manager.question_not_found(question_id), 404
     #Validate Author
-    if request.args.get('author') is None or not request.args.get('author'):
-        return jsonify({ 'success':0, 'message': 'Author ID is required'})
-    if int(request.args['author']) == int(question_manager.search_question(question_id)['author']):
+    validate = validation.required(['author'])
+    if len(validate):
+        return jsonify({'success': 0, 'validation': validate}), 200
+    data = request.get_json()
+    if str(data['author']) == str(question_manager.search_question(question_id)['author']):
         question_manager.questions.remove(question_manager.search_question(question_id))
         return jsonify({ 'success': 1, 'message': 'Question Removed successfully'}), 200
     return jsonify({
         'success': 0, 
-        'message': 'You donot have permission to delete this Question {0}'.format(question_manager.search_question(question_id)['author']) 
+        'message': 'You donot have permission to delete this Question' 
         }), 401
 
 #Route to POST an answer to a Question
 @app.route('/api/v1/questions/<question_id>/answers', methods=['POST'])
 def post_answer(question_id):
     #check if question exists
-    if question_manager.search_question(question_id) is not True:
-        return question_manager.search_question(question_id), 404
+    if question_manager.question_not_found(question_id) is not True:
+        return question_manager.question_not_found(question_id), 404
     #Validate User Input
     validate = validation.required(['author','answer'])
     if len(validate) > 0:
         return jsonify({'success': 0, 'validation': validate}), 200
 
-    if validation.unique('answers', request.args['answer'], 'answer') is not None:
-        return jsonify({ 'message': 'This answer has already been given, please try another.' })
-    
+    if validation.unique('answers', request.get_json('answer'), 'answer') is not None:
+        return jsonify({ 'message': 'This answer has already been given, please try another.' }), 200
+    data = request.get_json()
     #Post the Answer to this Question
-    answer = {
-        'id' : uuid.uuid1(),
-        'question_id': question_manager.search_question(question_id)['id'],
-        'author_id': request.args['author'], 'answer': request.args['answer'],
-        'prefered_answer': False, 'created_at': str(datetime.now())
+    response_answer = {
+        'id' : str(uuid.uuid1()),
+        'question_id': question_id,
+        'author_id': data['author'], 
+        'answer': data['answer'],
+        'prefered_answer': 0, 
+        'created_at': str(datetime.now())
     }    
-    question_manager.answers.append(answer)
+    question_manager.answers.append(response_answer)
     return jsonify({
-        'success': 1, 'answer': answer, 'message': 'Answer posted successfuly'
+        'success': 1, 'message': 'Answer posted successfuly'
         }), 200
 
 #Add User authentication endpoints
@@ -106,7 +111,7 @@ def signup():
         return jsonify({'success': 0, 'validation': validate}), 200 
     user = {
         # make a UUID based on the host ID and current time
-        'id': uuid.uuid1(),
+        'id': str(uuid.uuid1()),
         'display_name': request.args['name'],
         'email': request.args['email'],
         'password': request.args['password']
