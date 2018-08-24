@@ -50,6 +50,8 @@ class Validator():
             try:
                 input = request.get_json()
                 input[i]
+                if not input[i]:
+                    error_message.append({ 'field' : i, 'message': i + ' is required' })
             except:
                 error_message.append({ 'field' : i, 'message': i + ' is required' })
         #return errors
