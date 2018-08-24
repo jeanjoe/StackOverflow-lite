@@ -50,7 +50,8 @@ class Validator():
             try:
                 input = request.get_json()
                 input[i]
-                if not input[i]:
+                #catch key submitted 
+                if not input[i] or input[i].isspace():
                     error_message.append({ 'field' : i, 'message': i + ' is required' })
             except:
                 error_message.append({ 'field' : i, 'message': i + ' is required' })

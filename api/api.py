@@ -30,10 +30,10 @@ def post_question():
     #Post question
     question = {
         'id' : len(question_manager.questions) + 1,
-        'author': data['author'],
-        'title': data['title'],
-        'body': data['body'],
-        'tags': data['tags'],
+        'author': data['author'].strip(),
+        'title': data['title'].strip(),
+        'body': data['body'].strip(),
+        'tags': data['tags'].strip(),
         'created_at': str(datetime.now())
     }    
     question_manager.questions.append(question)
@@ -91,8 +91,8 @@ def post_answer(question_id):
     response_answer = {
         'id' : str(uuid.uuid1()),
         'question_id': question_id,
-        'author_id': data['author'], 
-        'answer': data['answer'],
+        'author_id': data['author'].strip(), 
+        'answer': data['answer'].strip(),
         'prefered_answer': 0, 
         'created_at': str(datetime.now())
     }    
