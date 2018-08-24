@@ -28,9 +28,8 @@ def post_question():
         return jsonify({ 'message': 'This question has already been asked, please try another.' }), 200
     
     #Post question
-    last_id = question_manager.last_id('questions')
     question = {
-        'id' : last_id+1,
+        'id' : len(question_manager.questions) + 1,
         'author': data['author'],
         'title': data['title'],
         'body': data['body'],

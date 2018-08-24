@@ -30,11 +30,6 @@ class ManageQuestions():
         question = next((question for question in self.questions if str(question['id']) == str(question_id)), None)
         return question
 
-    def last_id(self, search_type):
-        if search_type == 'answers':
-            return self.answers[-1]['id'] if len(self.answers) > 0 else  0
-        return self.questions[-1]['id'] if len(self.questions) > 0 else  0
-
 #User class
 class ManageUser():
     def __init__(self, users = []):
