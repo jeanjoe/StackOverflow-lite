@@ -1,26 +1,28 @@
 import unittest, json, requests
+from loremipsum import get_sentence
 from datetime import datetime
 from api.models import ManageQuestions
+import app
 
-# BASE_URL = 'http://127.0.0.1:5000/api/v1/questions'
-BASE_URL = 'https://manzede-stackoverflow-lite.herokuapp.com/api/v1/questions'
+BASE_URL = 'http://127.0.0.1:5000/api/v1/questions'
+# BASE_URL = 'https://manzede-stackoverflow-lite.herokuapp.com/api/v1/questions'
 
 question_manager = ManageQuestions()
 questions = [
     {
-        "author": 1,
-        'title': 'Does my first Mock Test title Work?',
-        'body': 'Mocking second Test body Text',
+        "author": "1",
+        "title": "Does my first Mock Test title Work?",
+        "body": "Mocking second Test body Text",
         "created_at": str(datetime.now()),
-        "id": 1,
+        "id": "1",
         "tags": "html, test, python",
     },
     {
-        "author": 1,
+        "author": "1",
         'title': 'Second Mock Test title seems not Working',
         'body': 'Mocking second Test body Text',
         "created_at": str(datetime.now()),
-        "id": 2,
+        "id": "2",
         "tags": "html, test, python",
     }
 ]
@@ -33,66 +35,50 @@ class TestApi(unittest.TestCase):
 
     def test_get_all_question(self):
         response = requests.get(BASE_URL)
-        self.assertIsInstance(response.json(), dict)
+        self.assertEqual(response.status_code, 200)
 
     def test_post_question(self):
         test_data = {
-            'author': 1,
-            'title': 'Does my post question reach the end point?',
-            'body': 'Am testing my Api End point for posting Questions',
-            'tags': 'Test, Python'
+            "author": "1",
+            "title": get_sentence(start_with_lorem=True),
+            "body": get_sentence(start_with_lorem=True),
+            "tags": "Test, Python"
         }
-        response = requests.post(BASE_URL, params= test_data)
+        response = requests.post(BASE_URL, json= test_data)
         #On successfull Posting, Return success must Equal 1
-        return self.assertEqual(1, response.json()['success'])
+        self.assertEqual(response.status_code, 201)
     
     def test_get_specific_question(self):
-        response = requests.get(BASE_URL+'/1')
-        self.assertEqual(1, response.json()['success'])
+        response = requests.get("{}/1".format(BASE_URL))
+        self.assertEqual(response.status_code, 200)
     
     def test_get_specific_question_not_found(self):
-        response = requests.get(BASE_URL+'/1000')
-        expected_response = {
-            'success': 0,
-            'message': 'Unable to find Question with ID 1000'
-        }
-        self.assertEqual(expected_response, response.json())
+        response = requests.get("{}/14r451".format(BASE_URL))
+        self.assertEqual(response.status_code, 404)
 
     def test_successful_delete_question(self):
-        response = requests.delete(BASE_URL + '/2?author=1')
-        expected_response = {
-            'success': 1,
-            'message': 'Question Removed successfully'
-        }
-        self.assertEqual(expected_response, response.json())
+        response = requests.delete("{}/2".format(BASE_URL))
+        self.assertEqual(response.status_code, 200)
 
     def test_delete_question_not_found(self):
-        response = requests.delete(BASE_URL + '/12?author=1')
-        expected_response = {
-            'success': 0, 
-            'message': 'Unable to find Question with ID 12'
-        }
-        self.assertEqual(expected_response, response.json())
+        response = requests.delete('{}/a701'.format(BASE_URL), data=json.dumps({ "author": "2"}) )
+        self.assertEqual(response.status_code, 404)
 
     def test_unauthorised_delete_question(self):
-        response = requests.delete(BASE_URL + '/1?author=5')
-        expected_response = {
-            'success': 0, 
-            'message': 'You donot have permission to delete this Question 1'
-        }
-        self.assertEqual(expected_response, response.json())
+        response = requests.delete('{}/1'.format(BASE_URL), json={"author": "5"})
+        self.assertEqual(response.status_code, 401)
  
     def test_post_answer(self):
         test_data = {
-            'author': 12,
-            'answer': 'Test answer',
+            "author": "12",
+            "answer": get_sentence(start_with_lorem=True),
         }
-        response = requests.post(BASE_URL + '/1/answers', params= test_data)
-        #On successfull Posting, Return success must Equal 1
-        return self.assertEqual(1, response.json()['success'])
+        response = requests.post('{}/1/answers'.format(BASE_URL), 
+                                json= test_data )
+        return self.assertEqual(200, response.status_code)
 
     def teardown(self):
-        # teardown here..
+        # teardown here..for resetting questions
         question_manager.questions = self.questions
 
 if __name__ == '__main__':
