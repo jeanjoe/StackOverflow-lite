@@ -4,8 +4,8 @@ from datetime import datetime
 from api.models import ManageQuestions
 import app
 
-BASE_URL = 'http://127.0.0.1:5000/api/v1/questions'
-# BASE_URL = 'https://manzede-stackoverflow-lite.herokuapp.com/api/v1/questions'
+# BASE_URL = 'http://127.0.0.1:5000/api/v1/questions'
+BASE_URL = 'https://manzede-stackoverflow-lite.herokuapp.com/api/v1/questions'
 
 question_manager = ManageQuestions()
 questions = [
